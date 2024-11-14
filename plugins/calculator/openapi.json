@@ -1,0 +1,40 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Calculator",
+    "description": "A calculator based on Langchain, supporting basic math operations",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://caldeno.deno.dev"
+    }
+  ],
+  "paths": {
+    "/calculate": {
+      "post": {
+        "operationId": "Calculate",
+        "description": "Execute math calculation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "expression"
+                ],
+                "properties": {
+                  "expression": {
+                    "type": "string",
+                    "description": "Math expression, e.g. '(1 + 2) ^ 3 / 4 * 5'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
