@@ -1,0 +1,122 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "WikipediaPageSummary",
+        "description": "An API to retrieve summaries of Wikipedia pages based on given page titles. Limits summary to 1200 characters to reduce token consumption.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://en.wikipedia.org/api/rest_v1",
+            "description": "Wikipedia REST API Server"
+        }
+    ],
+    "paths": {
+        "/page/summary/{title}": {
+            "get": {
+                "operationId": "WikipediaPageSummary",
+                "summary": "Retrieve a page summary with a max length of 1200 characters",
+                "description": "Fetch the summary of a Wikipedia page by specifying the page title. If the summary exceeds 1200 characters, it will be truncated.",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "path",
+                        "required": true,
+                        "description": "The title of the Wikipedia page to retrieve.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Artificial Intelligence"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response containing the page summary.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Artificial Intelligence"
+                                        },
+                                        "extract": {
+                                            "type": "string",
+                                            "example": "Artificial intelligence (AI) is intelligence demonstrated by machines, in contrast to the natural intelligence displayed by humans and animals. [Summary truncated]"
+                                        },
+                                        "truncated": {
+                                            "type": "boolean",
+                                            "example": true,
+                                            "description": "Indicates if the summary was truncated to fit the 1200 character limit."
+                                        },
+                                        "content_urls": {
+                                            "type": "object",
+                                            "properties": {
+                                                "desktop": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "page": {
+                                                            "type": "string",
+                                                            "example": "https://en.wikipedia.org/wiki/Artificial_Intelligence"
+                                                        }
+                                                    }
+                                                },
+                                                "mobile": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "page": {
+                                                            "type": "string",
+                                                            "example": "https://en.m.wikipedia.org/wiki/Artificial_Intelligence"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "thumbnail": {
+                                            "type": "object",
+                                            "properties": {
+                                                "source": {
+                                                    "type": "string",
+                                                    "example": "https://upload.wikimedia.org/wikipedia/commons/6/69/Artificial_Intelligence_%28AI%29.jpg"
+                                                },
+                                                "width": {
+                                                    "type": "integer",
+                                                    "example": 320
+                                                },
+                                                "height": {
+                                                    "type": "integer",
+                                                    "example": 240
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Page not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "https://mediawiki.org/wiki/HyperSwitch/errors/not_found"
+                                        },
+                                        "detail": {
+                                            "type": "string",
+                                            "example": "Page not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

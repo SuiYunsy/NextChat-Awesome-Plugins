@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "description": "A GPT that allows the user to read data from a link.",
-    "title": "Chat PDF GPT",
+    "title": "ChatPDF",
     "version": "v1"
   },
   "servers": [
@@ -14,7 +14,7 @@
     "/read_url": {
       "post": {
         "description": "Allows for reading the contents of an URL link, including PDF/DOC/DOCX/PPT/CSV/XLS/XLSX/HTML content, Google Drive, Dropbox, OneDrive, aidocmaker.com docs. Always wrap image URLs from the response field `z1_image_urls` in Markdown, where each image has a ## DESCRIPTION.",
-        "operationId": "ChatPDFReadRrl",
+        "operationId": "ChatPDFReadURL",
         "requestBody": {
           "content": {
             "application/json": {
@@ -45,7 +45,7 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Read the contents of an URL link",
+        "summary": "Read the contents of a URL link",
         "x-openai-isConsequential": false
       }
     }

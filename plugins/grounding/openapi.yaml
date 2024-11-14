@@ -1,0 +1,9 @@
+openapi: 3.0.0
+info:
+  title: G.G.S.G
+  description: Grounding with Google Search for Gemini
+  version: 1.0.0
+paths:
+  /path:
+    get:
+      operationId: googleSearch
